@@ -1,0 +1,96 @@
+{
+  "name": "exp_aug",
+  "config": {
+    "name": "exp_aug",
+    "model": "yolov8n.pt",
+    "data": "configs/rdd_india.yaml",
+    "road_augs": true,
+    "ultralytics": {
+      "imgsz": 640,
+      "epochs": 50,
+      "batch": 16,
+      "hsv_v": 0.5,
+      "degrees": 3.0,
+      "mixup": 0.1,
+      "close_mosaic": 10
+    }
+  },
+  "seed": 42,
+  "weights": "runs\\exp_aug\\weights\\best.pt",
+  "train_minutes": 103.4,
+  "test": {
+    "map50": 0.3223,
+    "map50_95": 0.1372,
+    "precision": 0.6232,
+    "recall": 0.3174,
+    "per_class": {
+      "longitudinal_crack": {
+        "precision": 0.4194,
+        "recall": 0.2742,
+        "ap50": 0.272,
+        "ap50_95": 0.1104
+      },
+      "transverse_crack": {
+        "precision": 1.0,
+        "recall": 0.0,
+        "ap50": 0.023,
+        "ap50_95": 0.0042
+      },
+      "alligator_crack": {
+        "precision": 0.5544,
+        "recall": 0.6021,
+        "ap50": 0.5997,
+        "ap50_95": 0.2805
+      },
+      "pothole": {
+        "precision": 0.5191,
+        "recall": 0.3932,
+        "ap50": 0.3944,
+        "ap50_95": 0.1539
+      }
+    },
+    "speed_ms": {
+      "preprocess": 0.26,
+      "inference": 2.64,
+      "loss": 0.0,
+      "postprocess": 0.65
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}

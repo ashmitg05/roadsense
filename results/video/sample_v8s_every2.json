@@ -1,0 +1,15 @@
+{
+  "video": "app\\public\\samples\\sample.mp4",
+  "frames": 700,
+  "processed_frames": 350,
+  "every_nth": 2,
+  "video_fps": 25.0,
+  "unique_counts": {
+    "longitudinal_crack": 6,
+    "transverse_crack": 0,
+    "alligator_crack": 0,
+    "pothole": 0
+  },
+  "inference_fps": 24.4,
+  "pipeline_fps_in_video_frames": 13.3
+}

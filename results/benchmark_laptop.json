@@ -1,0 +1,74 @@
+{
+  "host": {
+    "cpu": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "machine": "AMD64",
+    "threads": 16
+  },
+  "rows": [
+    {
+      "model": "runs\\exp_v8s\\weights\\best.pt",
+      "map50": 0.3548,
+      "map50_95": 0.1448,
+      "latency_ms_p50": 67.8,
+      "latency_ms_p95": 81.0,
+      "fps": 14.2,
+      "size_mb": 22.5,
+      "peak_ram_mb": 899,
+      "images": 536,
+      "map50_drop_vs_ref": 0.0,
+      "map50_95_drop_vs_ref": 0.0
+    },
+    {
+      "model": "models\\exp_v8s\\model_fp16.onnx",
+      "map50": 0.3545,
+      "map50_95": 0.1445,
+      "latency_ms_p50": 70.6,
+      "latency_ms_p95": 79.7,
+      "fps": 14.1,
+      "size_mb": 22.4,
+      "peak_ram_mb": 273,
+      "images": 536,
+      "map50_drop_vs_ref": 0.0003,
+      "map50_95_drop_vs_ref": 0.0003
+    },
+    {
+      "model": "models\\exp_v8s\\model_fp32.onnx",
+      "map50": 0.3542,
+      "map50_95": 0.1445,
+      "latency_ms_p50": 65.7,
+      "latency_ms_p95": 74.1,
+      "fps": 15.2,
+      "size_mb": 44.8,
+      "peak_ram_mb": 236,
+      "images": 536,
+      "map50_drop_vs_ref": 0.0006,
+      "map50_95_drop_vs_ref": 0.0003
+    },
+    {
+      "model": "models\\exp_v8s\\model_int8.onnx",
+      "map50": 0.0,
+      "map50_95": 0.0,
+      "latency_ms_p50": 27.3,
+      "latency_ms_p95": 35.3,
+      "fps": 35.6,
+      "size_mb": 11.6,
+      "peak_ram_mb": 137,
+      "images": 536,
+      "map50_drop_vs_ref": 0.3548,
+      "map50_95_drop_vs_ref": 0.1448
+    },
+    {
+      "model": "models\\exp_v8s\\model_int8_head.onnx",
+      "map50": 0.3355,
+      "map50_95": 0.134,
+      "latency_ms_p50": 41.1,
+      "latency_ms_p95": 50.2,
+      "fps": 23.8,
+      "size_mb": 18.0,
+      "peak_ram_mb": 152,
+      "images": 536,
+      "map50_drop_vs_ref": 0.0193,
+      "map50_95_drop_vs_ref": 0.0108
+    }
+  ]
+}

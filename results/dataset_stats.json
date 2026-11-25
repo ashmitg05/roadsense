@@ -1,0 +1,25 @@
+{
+  "images": 7706,
+  "negatives": 4482,
+  "images_per_class": {
+    "longitudinal_crack": 1110,
+    "transverse_crack": 60,
+    "alligator_crack": 1758,
+    "pothole": 1530
+  },
+  "boxes_per_class": {
+    "pothole": 3187,
+    "longitudinal_crack": 1556,
+    "alligator_crack": 2021,
+    "transverse_crack": 68
+  },
+  "box_size_buckets": {
+    "large": 3658,
+    "medium": 2864,
+    "small": 310
+  },
+  "resolutions": {
+    "720x720": 7706
+  },
+  "imbalance_ratio_max_min": 46.87
+}

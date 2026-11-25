@@ -1,0 +1,6 @@
+# Exp 4 class imbalance: repeat-factor oversampling of minority classes
+name: exp_rfs
+model: yolov8n.pt
+data: configs/rdd_india.yaml
+train_list: data/splits/train_rfs.txt
+ultralytics: {imgsz: 640, epochs: 50, batch: 16}

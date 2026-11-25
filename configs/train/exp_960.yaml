@@ -1,0 +1,5 @@
+# Exp 2 image size: 960 vs 640 (thin cracks). Source images are 720px, so 960 upsamples.
+name: exp_960
+model: yolov8n.pt
+data: configs/rdd_india.yaml
+ultralytics: {imgsz: 960, epochs: 50, batch: 8}

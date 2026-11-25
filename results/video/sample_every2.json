@@ -1,0 +1,17 @@
+{
+  "video": "app\\public\\samples\\sample.mp4",
+  "frames": 700,
+  "processed_frames": 350,
+  "every_nth": 2,
+  "video_fps": 25.0,
+  "unique_counts": {
+    "longitudinal_crack": 0,
+    "transverse_crack": 0,
+    "alligator_crack": 0,
+    "pothole": 0
+  },
+  "tracks": [],
+  "inference_fps": 20.9,
+  "pipeline_fps_in_video_frames": 7.5,
+  "model": "models/baseline/model_int8_head.onnx"
+}

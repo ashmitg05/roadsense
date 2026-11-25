@@ -1,0 +1,9 @@
+# Phase 2 baseline: YOLOv8n, 640px, Ultralytics defaults except epochs
+# (50 instead of 100 so every Phase 3 run fits the same compute budget).
+name: baseline
+model: yolov8n.pt
+data: configs/rdd_india.yaml
+ultralytics:
+  imgsz: 640
+  epochs: 50
+  batch: 16

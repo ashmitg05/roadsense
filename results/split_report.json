@@ -1,0 +1,38 @@
+{
+  "seed": 42,
+  "phash_thresh": 8,
+  "neg_frac": 0.1,
+  "groups": 3133,
+  "largest_group": 72,
+  "train": {
+    "images": 2506,
+    "negatives": 245,
+    "boxes": {
+      "longitudinal_crack": 1093,
+      "transverse_crack": 47,
+      "alligator_crack": 1419,
+      "pothole": 2257
+    }
+  },
+  "val": {
+    "images": 540,
+    "negatives": 61,
+    "boxes": {
+      "longitudinal_crack": 215,
+      "transverse_crack": 11,
+      "alligator_crack": 313,
+      "pothole": 429
+    }
+  },
+  "test": {
+    "images": 536,
+    "negatives": 52,
+    "boxes": {
+      "longitudinal_crack": 248,
+      "transverse_crack": 10,
+      "alligator_crack": 289,
+      "pothole": 501
+    }
+  },
+  "min_cross_split_phash_distance": 10
+}

@@ -1,0 +1,6 @@
+# Exp 3 augmentations: road-specific albumentations + darker HSV
+name: exp_aug
+model: yolov8n.pt
+data: configs/rdd_india.yaml
+road_augs: true
+ultralytics: {imgsz: 640, epochs: 50, batch: 16, hsv_v: 0.5, degrees: 3.0, mixup: 0.1, close_mosaic: 10}

@@ -1,0 +1,91 @@
+{
+  "name": "baseline",
+  "config": {
+    "name": "baseline",
+    "model": "yolov8n.pt",
+    "data": "configs/rdd_india.yaml",
+    "ultralytics": {
+      "imgsz": 640,
+      "epochs": 50,
+      "batch": 16
+    }
+  },
+  "seed": 42,
+  "weights": "runs\\baseline\\weights\\best.pt",
+  "train_minutes": 188.5,
+  "test": {
+    "map50": 0.342,
+    "map50_95": 0.1396,
+    "precision": 0.3597,
+    "recall": 0.3525,
+    "per_class": {
+      "longitudinal_crack": {
+        "precision": 0.4092,
+        "recall": 0.371,
+        "ap50": 0.2789,
+        "ap50_95": 0.1159
+      },
+      "transverse_crack": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "ap50": 0.0363,
+        "ap50_95": 0.0056
+      },
+      "alligator_crack": {
+        "precision": 0.5047,
+        "recall": 0.6159,
+        "ap50": 0.6049,
+        "ap50_95": 0.2742
+      },
+      "pothole": {
+        "precision": 0.5247,
+        "recall": 0.4232,
+        "ap50": 0.4481,
+        "ap50_95": 0.1627
+      }
+    },
+    "speed_ms": {
+      "preprocess": 3.7,
+      "inference": 4.64,
+      "loss": 0.0,
+      "postprocess": 0.9
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}

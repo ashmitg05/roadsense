@@ -1,0 +1,16 @@
+# Serving deps only (no torch). Versions = those tested locally.
+fastapi==0.165.0
+uvicorn==0.54.0
+python-multipart==0.0.34
+onnxruntime==1.32.0
+opencv-python-headless==5.1.0.95
+numpy==2.4.6
+# runtime deps of supervision/trackers that their import actually needs
+scipy==1.17.1
+pydeprecate==0.14.0
+pillow==13.0.0
+pyyaml==6.0.4
+tqdm==4.70.1
+requests==2.34.2
+defusedxml==0.7.1
+rich==15.0.0

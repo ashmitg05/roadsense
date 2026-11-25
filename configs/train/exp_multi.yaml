@@ -1,0 +1,6 @@
+# Exp 5 data: India + Japan/Czech/US train; val/test India only
+name: exp_multi
+model: yolov8n.pt
+data: configs/rdd_india.yaml
+train_list: data/splits/train_multi.txt
+ultralytics: {imgsz: 640, epochs: 50, batch: 16}

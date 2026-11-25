@@ -1,0 +1,5 @@
+# Exp 1 model size: v8s vs baseline v8n
+name: exp_v8s
+model: yolov8s.pt
+data: configs/rdd_india.yaml
+ultralytics: {imgsz: 640, epochs: 50, batch: 16}

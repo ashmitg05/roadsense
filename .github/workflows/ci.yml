@@ -1,0 +1,22 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install (no torch: tests use the committed INT8 ONNX model)
+        run: |
+          pip install -r requirements-serve.txt
+          pip install --no-deps supervision==0.32.0 trackers==2.7.0
+          pip install imagehash matplotlib pyyaml pillow pytest ruff httpx
+      - name: Lint
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Test
+        run: pytest -q

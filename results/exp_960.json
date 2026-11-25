@@ -1,0 +1,91 @@
+{
+  "name": "exp_960",
+  "config": {
+    "name": "exp_960",
+    "model": "yolov8n.pt",
+    "data": "configs/rdd_india.yaml",
+    "ultralytics": {
+      "imgsz": 960,
+      "epochs": 50,
+      "batch": 8
+    }
+  },
+  "seed": 42,
+  "weights": "runs\\exp_960\\weights\\best.pt",
+  "train_minutes": 75.7,
+  "test": {
+    "map50": 0.3261,
+    "map50_95": 0.1318,
+    "precision": 0.3616,
+    "recall": 0.3287,
+    "per_class": {
+      "longitudinal_crack": {
+        "precision": 0.3972,
+        "recall": 0.3387,
+        "ap50": 0.2862,
+        "ap50_95": 0.1129
+      },
+      "transverse_crack": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "ap50": 0.0261,
+        "ap50_95": 0.006
+      },
+      "alligator_crack": {
+        "precision": 0.5433,
+        "recall": 0.5917,
+        "ap50": 0.5717,
+        "ap50_95": 0.2544
+      },
+      "pothole": {
+        "precision": 0.506,
+        "recall": 0.3844,
+        "ap50": 0.4203,
+        "ap50_95": 0.1537
+      }
+    },
+    "speed_ms": {
+      "preprocess": 0.52,
+      "inference": 6.34,
+      "loss": 0.0,
+      "postprocess": 0.77
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}
