@@ -1,4 +1,4 @@
-"""API + inference pipeline tests. Need the committed INT8 model (models/model_int8_head.onnx)."""
+"""API + inference pipeline tests. Need the committed INT8 model (models/model.onnx)."""
 
 import os
 import time
@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 import pytest
 
-MODEL = Path(os.environ.get("TEST_MODEL", "models/model_int8_head.onnx"))
+MODEL = Path(os.environ.get("TEST_MODEL", "models/model.onnx"))
 FIXTURE = Path("tests/fixtures/road.jpg")
 pytestmark = pytest.mark.skipif(not MODEL.exists(), reason="model not exported yet")
 

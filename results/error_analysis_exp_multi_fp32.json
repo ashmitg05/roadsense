@@ -1,0 +1,181 @@
+{
+  "name": "exp_multi_fp32",
+  "weights": "models/model.onnx",
+  "list": "data\\splits\\test.txt",
+  "imgsz": 640,
+  "overall": {
+    "images": 536,
+    "map50": 0.3578,
+    "map50_95": 0.1534,
+    "per_class": {
+      "longitudinal_crack": {
+        "ap50": 0.3626,
+        "n_gt": 248
+      },
+      "transverse_crack": {
+        "ap50": 0.0673,
+        "n_gt": 10
+      },
+      "alligator_crack": {
+        "ap50": 0.5871,
+        "n_gt": 289
+      },
+      "pothole": {
+        "ap50": 0.4142,
+        "n_gt": 501
+      }
+    }
+  },
+  "by_lighting": {
+    "bright": {
+      "images": 487,
+      "map50": 0.3648,
+      "map50_95": 0.1577,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.3648,
+          "n_gt": 228
+        },
+        "transverse_crack": {
+          "ap50": 0.0749,
+          "n_gt": 10
+        },
+        "alligator_crack": {
+          "ap50": 0.5969,
+          "n_gt": 251
+        },
+        "pothole": {
+          "ap50": 0.4227,
+          "n_gt": 469
+        }
+      }
+    },
+    "dim": {
+      "images": 49,
+      "map50": 0.3929,
+      "map50_95": 0.1647,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.3497,
+          "n_gt": 20
+        },
+        "alligator_crack": {
+          "ap50": 0.5367,
+          "n_gt": 38
+        },
+        "pothole": {
+          "ap50": 0.2921,
+          "n_gt": 32
+        }
+      }
+    }
+  },
+  "by_surface": {
+    "unknown": {
+      "images": 536,
+      "map50": 0.3578,
+      "map50_95": 0.1534,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.3626,
+          "n_gt": 248
+        },
+        "transverse_crack": {
+          "ap50": 0.0673,
+          "n_gt": 10
+        },
+        "alligator_crack": {
+          "ap50": 0.5871,
+          "n_gt": 289
+        },
+        "pothole": {
+          "ap50": 0.4142,
+          "n_gt": 501
+        }
+      }
+    }
+  },
+  "by_box_size": {
+    "small": {
+      "images": 536,
+      "map50": 0.1302,
+      "map50_95": 0.0476,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.0,
+          "n_gt": 1
+        },
+        "pothole": {
+          "ap50": 0.2603,
+          "n_gt": 55
+        }
+      }
+    },
+    "medium": {
+      "images": 536,
+      "map50": 0.2083,
+      "map50_95": 0.0845,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.2981,
+          "n_gt": 122
+        },
+        "transverse_crack": {
+          "ap50": 0.0545,
+          "n_gt": 6
+        },
+        "alligator_crack": {
+          "ap50": 0.0946,
+          "n_gt": 16
+        },
+        "pothole": {
+          "ap50": 0.386,
+          "n_gt": 316
+        }
+      }
+    },
+    "large": {
+      "images": 536,
+      "map50": 0.3516,
+      "map50_95": 0.1567,
+      "per_class": {
+        "longitudinal_crack": {
+          "ap50": 0.3439,
+          "n_gt": 125
+        },
+        "transverse_crack": {
+          "ap50": 0.108,
+          "n_gt": 4
+        },
+        "alligator_crack": {
+          "ap50": 0.608,
+          "n_gt": 273
+        },
+        "pothole": {
+          "ap50": 0.3464,
+          "n_gt": 130
+        }
+      }
+    }
+  },
+  "false_positives_at_conf_0.25": {
+    "alligator_crack:localisation": 62,
+    "pothole:localisation": 56,
+    "longitudinal_crack:localisation": 33,
+    "longitudinal_crack:background": 26,
+    "pothole:background": 24,
+    "pothole:duplicate": 14,
+    "alligator_crack:background": 13,
+    "alligator_crack:wrong_class": 10,
+    "alligator_crack:duplicate": 8,
+    "pothole:wrong_class": 3,
+    "longitudinal_crack:duplicate": 2,
+    "transverse_crack:localisation": 1
+  },
+  "false_negatives_at_conf_0.25": {
+    "pothole": 339,
+    "longitudinal_crack": 181,
+    "alligator_crack": 139,
+    "transverse_crack": 10
+  }
+}

@@ -6,7 +6,7 @@ POST /detect/video          multipart file (<=50 MB, <=30 s) -> {job_id}
 GET  /jobs/{job_id}         status + result
 GET  /jobs/{job_id}/video   annotated .webm
 
-MODEL_PATH=models/model_int8_head.onnx uvicorn src.inference.api:app
+MODEL_PATH=models/model.onnx uvicorn src.inference.api:app
 """
 
 import base64
@@ -28,7 +28,7 @@ from fastapi.responses import FileResponse
 from src.inference.detector import NAMES, Detector, draw
 from src.inference.video import process_video
 
-MODEL_PATH = os.environ.get("MODEL_PATH", "models/model_int8_head.onnx")
+MODEL_PATH = os.environ.get("MODEL_PATH", "models/model.onnx")
 MAX_IMAGE_MB, MAX_VIDEO_MB, MAX_VIDEO_S = 10, 50, 30
 RATE_LIMIT = int(os.environ.get("RATE_LIMIT_PER_MIN", "30"))
 JOB_TTL_S = 3600

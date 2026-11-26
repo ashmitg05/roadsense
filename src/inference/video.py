@@ -4,7 +4,7 @@ ByteTrack is class-agnostic, so each track's class is the majority vote of its
 per-frame classes. A track counts once, and only if it was matched in at least
 `min_frames` processed frames (filters one-frame flickers).
 
-    python -m src.inference.video in.mp4 --model models/model_int8_head.onnx --every 2 --out out.mp4
+    python -m src.inference.video in.mp4 --model models/model.onnx --every 2 --out out.mp4
 """
 
 import argparse
@@ -141,7 +141,7 @@ def gps_map(tracks: list[dict], gpx: Path, out: Path) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("video", type=Path)
-    ap.add_argument("--model", default="models/model_int8_head.onnx")
+    ap.add_argument("--model", default="models/model.onnx")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--every", type=int, default=1, help="process every Nth frame")
     ap.add_argument("--gpx", type=Path, help="optional GPX track -> damage map html")

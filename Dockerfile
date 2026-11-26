@@ -2,7 +2,7 @@
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=8080 \
-    MODEL_PATH=/app/models/model_int8_head.onnx
+    MODEL_PATH=/app/models/model.onnx
 
 WORKDIR /app
 COPY requirements-serve.txt .
@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements-serve.txt \
 
 COPY src/__init__.py src/__init__.py
 COPY src/inference src/inference
-COPY models/model_int8_head.onnx models/model_int8_head.onnx
+COPY models/model.onnx models/model.onnx
 
 RUN useradd -m app && chown -R app /app
 USER app

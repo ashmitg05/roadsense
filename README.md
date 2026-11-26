@@ -79,25 +79,26 @@ One variable changed per run against the baseline (YOLOv8n, 640px, Ultralytics d
 | exp_960 | Exp 2 image size: 960 vs 640 (thin cracks). Source images are 720px, so 960 upsamples. | 0.326 | 0.132 | 0.286 | 0.026 | 0.572 | 0.420 | 75.7 |
 | exp_aug | Exp 3 augmentations: road-specific albumentations + darker HSV | 0.322 | 0.137 | 0.272 | 0.023 | 0.600 | 0.394 | 103.4 |
 | exp_rfs | Exp 4 class imbalance: repeat-factor oversampling of minority classes | 0.339 | 0.142 | 0.294 | 0.005 | 0.624 | 0.434 | 31.8 |
+| exp_multi | Exp 5 data: India + Japan/Czech/US train; val/test India only | 0.376 | 0.164 | 0.384 | 0.080 | 0.615 | 0.425 | 196.3 |
 <!-- END:experiments -->
 
 ## Error analysis (Phase 4)
 
 <!-- BEGIN:errors -->
-**exp_v8s_int8head** on `data\splits\test.txt` (from `results\error_analysis_exp_v8s_int8head.json`)
+**exp_multi_fp32** on `data\splits\test.txt` (from `results\error_analysis_exp_multi_fp32.json`)
 
 | Slice | Images | mAP@50 | mAP@50-95 |
 |---|---|---|---|
-| overall | 536 | 0.336 | 0.134 |
-| lighting: bright | 487 | 0.345 | 0.140 |
-| lighting: dim | 49 | 0.344 | 0.128 |
-| box_size: small | 536 | 0.124 | 0.036 |
-| box_size: medium | 536 | 0.188 | 0.074 |
-| box_size: large | 536 | 0.318 | 0.135 |
+| overall | 536 | 0.358 | 0.153 |
+| lighting: bright | 487 | 0.365 | 0.158 |
+| lighting: dim | 49 | 0.393 | 0.165 |
+| box_size: small | 536 | 0.130 | 0.048 |
+| box_size: medium | 536 | 0.208 | 0.085 |
+| box_size: large | 536 | 0.352 | 0.157 |
 
-Top false positives @0.25: pothole:localisation (104), longitudinal_crack:localisation (79), alligator_crack:localisation (69), pothole:background (56), longitudinal_crack:background (38)
+Top false positives @0.25: alligator_crack:localisation (62), pothole:localisation (56), longitudinal_crack:localisation (33), longitudinal_crack:background (26), pothole:background (24)
 
-False negatives @0.25: pothole (296), longitudinal_crack (157), alligator_crack (128), transverse_crack (10)
+False negatives @0.25: pothole (339), longitudinal_crack (181), alligator_crack (139), transverse_crack (10)
 
 <!-- END:errors -->
 
@@ -110,22 +111,22 @@ CPU: AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD (16 threads), batch 1, 5
 
 | Format | mAP@50 | mAP@50-95 | Δ mAP@50 | p50 ms | p95 ms | FPS | Size MB | Peak RAM MB |
 |---|---|---|---|---|---|---|---|---|
-| PyTorch FP32 | 0.355 | 0.145 | -0.000 | 67.8 | 81.0 | 14.2 | 22.5 | 899 |
-| ONNX fp16 | 0.354 | 0.144 | -0.000 | 70.6 | 79.7 | 14.1 | 22.4 | 273 |
-| ONNX fp32 | 0.354 | 0.144 | -0.001 | 65.7 | 74.1 | 15.2 | 44.8 | 236 |
-| ONNX int8 | 0.000 | 0.000 | -0.355 | 27.3 | 35.3 | 35.6 | 11.6 | 137 |
-| ONNX int8_head | 0.336 | 0.134 | -0.019 | 41.1 | 50.2 | 23.8 | 18.0 | 152 |
+| PyTorch FP32 | 0.359 | 0.154 | -0.000 | 24.1 | 29.6 | 40.6 | 6.5 | 792 |
+| ONNX fp16 | 0.358 | 0.154 | -0.001 | 28.6 | 33.9 | 35.4 | 6.4 | 171 |
+| ONNX fp32 | 0.358 | 0.153 | -0.001 | 25.4 | 30.1 | 39.9 | 12.8 | 153 |
+| ONNX int8 | 0.000 | 0.000 | -0.359 | 15.1 | 18.7 | 63.7 | 3.6 | 112 |
+| ONNX int8_head | 0.305 | 0.130 | -0.053 | 21.7 | 26.7 | 45.3 | 6.2 | 123 |
 <!-- END:benchmark -->
 
-_Latencies were measured while GPU training ran on the same laptop, so they are inflated; to be re-run on an idle machine._
+Model: exp_multi (YOLOv8n). Measured on an idle laptop. The same table for exp_v8s (measured while GPU training ran, so slower): `results/benchmark_laptop_v8s.md`. mAP here comes from `src/eval/metrics.py`, applied identically to every format, so it differs slightly from the Ultralytics test numbers above.
 
 Raspberry Pi instructions: [docs/deploy.md](docs/deploy.md#3-raspberry-pi-45-benchmark).
 
 ## Key decisions and trade-offs
 
 - **Leak-safe split by near-duplicate groups.** RDD India filenames are shuffled, so consecutive dashcam frames are not adjacent. Images are grouped by global pHash (union-find, Hamming <= 8) and whole groups go to one split. Minimum pHash distance between any two splits is 10 (`results/split_report.json`).
-- **Shipped model: YOLOv8s, ONNX INT8 with the Detect head left in FP32** (`models/model_int8_head.onnx`). v8s was the best run (test mAP@50 0.360). On CPU it keeps mAP@50 0.336 vs 0.354 for ONNX FP32 and is about 1.6x faster (41.1 vs 65.7 ms p50).
-- **Why the head stays FP32.** Full static INT8 gives mAP 0. The Detect output concatenates box coordinates (0-640) with class scores (0-1); one INT8 scale for that tensor wipes out the scores. Excluding `/model.22/` from quantisation fixes it.
+- **Shipped model: exp_multi (YOLOv8n trained on India + Japan/Czech/US), ONNX FP32** (`models/model.onnx`, 12.8 MB). Best run (test mAP@50 0.376) and the smallest architecture. ONNX FP32 runs at 25.4 ms p50 on CPU. INT8 with the head in FP32 is only 15% faster (21.7 ms) but loses 0.053 mAP@50 on v8n, so FP32 wins. For comparison, v8s INT8-head: 0.336 mAP@50 at 41.1 ms (`results/benchmark_laptop_v8s.md`).
+- **Why full INT8 fails.** Full static INT8 gives mAP 0. The Detect output concatenates box coordinates (0-640) with class scores (0-1); one INT8 scale for that tensor wipes out the scores. Excluding `/model.22/` from quantisation fixes it.
 - **Serving has no PyTorch.** ONNX Runtime + OpenCV only; own letterbox and NMS, checked to match Ultralytics output. Docker image 959 MB.
 - **Video counts are per track, not per frame.** ByteTrack, majority-vote class per track, a track counts only if seen in >= 3 frames.
 - **Single seed (42).** Differences of about 0.02 mAP between runs may be noise; read the table as directional.
@@ -135,9 +136,11 @@ Raspberry Pi instructions: [docs/deploy.md](docs/deploy.md#3-raspberry-pi-45-ben
 - **960 px input** (0.326 vs 0.342 baseline). Source images are 720 px, so 960 only upsamples.
 - **Road augmentations** (motion blur, rain, fog, darker brightness, JPEG): 0.322. The India test set has no night or rain frames (darkest mean V = 68), so the test cannot reward robustness to them. Training also crashed twice on RAM and was resumed from `last.pt`, so its train time is not comparable.
 - **Repeat-factor oversampling**: 0.339, no gain. Transverse crack has only 68 boxes in the whole India set and 10 in test, so its AP (0.004-0.036) is noise in every run.
-- **Per-class confidence thresholds tuned on val** (`results/threshold_exp_v8s_int8head.json`): no test gain. Pothole's best threshold is the default 0.25; longitudinal crack moves to 0.15 and test F1 drops 0.379 -> 0.358. Missed potholes (296 of 501 at 0.25) are a model limit, not a threshold one.
+- **Per-class confidence thresholds tuned on val** (exp_v8s) (`results/threshold_exp_v8s_int8head.json`): no test gain. Pothole's best threshold is the default 0.25; longitudinal crack moves to 0.15 and test F1 drops 0.379 -> 0.358. Missed potholes (296 of 501 at 0.25) are a model limit, not a threshold one.
 - **Baseline train time (188.5 min) is inflated** by other CPU load at the time; v8s took 54.5 min.
-- **Next:** multi-country training (`exp_multi`, adds 7,673 transverse and 11,787 longitudinal boxes from Japan/Czech/US; running), labelled in-the-wild Indian dashcam set ([docs/labeling.md](docs/labeling.md)), Raspberry Pi benchmark, Cloud Run deploy ([docs/deploy.md](docs/deploy.md)).
+- **INT8 on v8n**: head-excluded INT8 loses 0.053 mAP@50 (vs 0.019 on v8s); the smaller model has less redundancy to absorb quantisation error.
+- **What did work: more data.** Adding Japan/Czech/US (15,307 images; 7,673 transverse and 11,787 longitudinal boxes) gave the best run: mAP@50 0.376 vs 0.342 baseline; transverse AP50 0.080 vs 0.036, longitudinal 0.384 vs 0.279. Pothole AP50 fell slightly (0.425 vs 0.448): the other countries have few potholes.
+- **Next:** labelled in-the-wild Indian dashcam set ([docs/labeling.md](docs/labeling.md)), Raspberry Pi benchmark, Cloud Run deploy ([docs/deploy.md](docs/deploy.md)).
 
 ## Reproduce (data)
 

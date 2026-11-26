@@ -11,10 +11,10 @@ mlruns/
 app/node_modules/
 app/dist/
 models/*/
-!models/model_int8_head.onnx
+!models/model.onnx
 results/video/*.webm
 *.bak
 mlflow.db
 *.pt
 results/failures/*/
-!results/failures/exp_v8s_int8head/
+!results/failures/exp_multi_fp32/

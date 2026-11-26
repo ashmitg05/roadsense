@@ -1,0 +1,92 @@
+{
+  "name": "exp_multi",
+  "config": {
+    "name": "exp_multi",
+    "model": "yolov8n.pt",
+    "data": "configs/rdd_india.yaml",
+    "train_list": "data/splits/train_multi.txt",
+    "ultralytics": {
+      "imgsz": 640,
+      "epochs": 50,
+      "batch": 16
+    }
+  },
+  "seed": 42,
+  "weights": "runs\\exp_multi\\weights\\best.pt",
+  "train_minutes": 196.3,
+  "test": {
+    "map50": 0.3759,
+    "map50_95": 0.1643,
+    "precision": 0.3509,
+    "recall": 0.4372,
+    "per_class": {
+      "longitudinal_crack": {
+        "precision": 0.3793,
+        "recall": 0.4597,
+        "ap50": 0.3837,
+        "ap50_95": 0.1672
+      },
+      "transverse_crack": {
+        "precision": 0.1511,
+        "recall": 0.1,
+        "ap50": 0.0799,
+        "ap50_95": 0.0247
+      },
+      "alligator_crack": {
+        "precision": 0.4765,
+        "recall": 0.692,
+        "ap50": 0.6146,
+        "ap50_95": 0.3
+      },
+      "pothole": {
+        "precision": 0.3966,
+        "recall": 0.497,
+        "ap50": 0.4253,
+        "ap50_95": 0.1651
+      }
+    },
+    "speed_ms": {
+      "preprocess": 0.27,
+      "inference": 3.18,
+      "loss": 0.0,
+      "postprocess": 0.63
+    }
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}

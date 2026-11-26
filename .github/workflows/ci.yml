@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install (no torch: tests use the committed INT8 ONNX model)
+      - name: Install (no torch: tests use the committed ONNX model)
         run: |
           pip install -r requirements-serve.txt
           pip install --no-deps supervision==0.32.0 trackers==2.7.0
